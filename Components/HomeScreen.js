@@ -3,13 +3,33 @@ import {View , StyleSheet , ActivityIndicator, Text , Image, TouchableOpacity} f
 import publicIP from 'react-native-public-ip';
 import Header from './Header'
 import * as Font from "expo-font"
+import Search from "./Search";
+import {countries} from 'country-data';
 
 
 class HomeScreen extends Component{
 
     state = {
         weather:  null,
-        country : null,
+        tosearch : null,
+        visible : false,
+    }
+
+    visiblechange = () =>
+    {
+        this.setState({visible : true});
+    }
+
+    cancelbutton = () =>
+    {
+        this.setState({visible : false});
+    }
+
+    handlepress = (value) =>
+    {
+        this.setState({tosearch : value});
+        this.state.tosearch = value;
+        this.setState({visible : false}); 
     }
 
     componentDidMount()
@@ -47,6 +67,24 @@ class HomeScreen extends Component{
         });
     }
 
+    componentDidUpdate()
+    {
+        if(this.state.tosearch)
+        {
+            let location = this.state.tosearch;
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + location +`&appid=50a7aa80fa492fa92e874d23ad061374`)
+            .then((resp) => {
+                return resp.json();
+            })
+            .then((data) => {
+                this.setState({weather : data});
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }
+    }
+
     render()
     {
         if(!this.state.weather){
@@ -58,14 +96,19 @@ class HomeScreen extends Component{
         }
         return(
             <React.Fragment>
-            <Header/>
+            <Header visiblechange = {this.visiblechange}/>
+            <Search 
+            handlepress = {this.handlepress}
+            cancelbutton = {this.cancelbutton}
+            visible = {this.state.visible}
+            />
             <View style = {styles.homestart}>
                 <View style = {{flex : 1 , backgroundColor : "#00E1FD"}}>
                     <View style = {{flex : 1 , justifyContent : "flex-end" , alignItems :"center"}}>
-                        <Text style = {{fontFamily: "regular" , fontSize : 90 , letterSpacing : -5}}>{(this.state.weather.main.temp - 273).toFixed(1)}</Text>
+                        <Text style = {{fontFamily: "regular" , fontSize : 90 , letterSpacing : -5}}>{(this.state.weather.main['temp'] - 273).toFixed(1)}</Text>
                     </View>
                     <View style = {{flex : 0.8 , alignItems : "center"}}>
-                        <Text style = {{fontFamily: "regular" , fontSize : 40}}>{this.state.country}</Text>
+                        <Text style = {{fontFamily: "regular" , fontSize : 40}}>{countries[this.state.weather.sys.country].name}</Text>
                         <Text style = {{fontFamily: "regular" , fontSize : 30}}>{this.state.weather.name}</Text>
                     </View>
                 </View>

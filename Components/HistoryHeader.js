@@ -3,24 +3,29 @@ import { Appbar} from 'react-native-paper';
 import {StyleSheet} from "react-native"
 
 
-class Header extends Component {
+class HistoryHeader extends Component {
+
+  _goBack = () =>
+  {
+    console.log('Fff');
+  }
 
   render() {
     return (
       <Appbar.Header style = {styles.header}>
-          <Appbar.Action icon="magnify" size ={30} onPress={this.props.visiblechange} /> 
+        <Appbar.BackAction
+          onPress={this._goBack}
+        />
       </Appbar.Header>
     );
   }
 }
 
-export default Header;
+export default HistoryHeader;
 
 const styles = StyleSheet.create({
     header : {
-        backgroundColor : "#00E1FD", 
-        paddingLeft : 20 , 
-        paddingTop : 10 , 
-        paddingBottom : 10
+        backgroundColor : "#1B2433", 
     }
 })
+
