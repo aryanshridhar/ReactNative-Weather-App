@@ -3,35 +3,38 @@ import { BottomNavigation, Text } from 'react-native-paper';
 import HomeScreen from './HomeScreen'
 
 
-const MusicRoute = () => {
+const HomeRoute = () => {
   return(
     <HomeScreen/>
   )
 }
-const AlbumsRoute = () => <Text>Albums</Text>;
+const HistoryRoute = () => <Text>Albums</Text>;
 
 class Navigator extends Component {
   state = {
     index: 0,
     routes: [
-      { key: 'music', title: 'Music', icon: 'queue-music' },
-      { key: 'albums', title: 'Albums', icon: 'album' },
+      { key: 'home', title: 'Home', icon: 'queue-music' , color : "#1B2433"},
+      { key: 'history', title: 'History', icon: 'album' , color : "#00E1FD"},
     ],
   };
 
   _handleIndexChange = index => this.setState({ index });
 
   _renderScene = BottomNavigation.SceneMap({
-    music: MusicRoute,
-    albums: AlbumsRoute,
+    home: HomeRoute,
+    history: HistoryRoute,
   });
 
   render() {
     return (
       <BottomNavigation
         activeColor = {'white'}
+        style = {{backgroundColor : '#1B2433'}}
         barStyle = {{backgroundColor : "#1B2433"}}
         navigationState={this.state}
+        shifting = {true}
+        barStyle = {{marginBottom  :10}}
         onIndexChange={this._handleIndexChange}
         renderScene={this._renderScene}
       />
