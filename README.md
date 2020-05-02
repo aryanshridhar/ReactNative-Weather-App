@@ -30,13 +30,14 @@ Issues and pull requests are always appreciated .
 <li>Move to the expo brach with : <pre>git checkout expo</pre></li>
 <li>Install all the dependencies listed in package.json file by running the following command in terminal : <pre>npm install</pre></li>
 <li>Start the deployment server using : <pre>expo start</pre></li>
-</li>
+</ul>
 <br>
 
-### API Used : 
+#### API Used : 
+<a href = 'https://openweathermap.org/api'>Api</a><br>
+Allowing Only 60 call/min and 1000 calls/day.
+<br>
 
-Click <a href = 'https://openweathermap.org/api'>here</a><br>
-Allowing Only 60 call/min and 1000 calls/day
 
 ### Download link : 
 
