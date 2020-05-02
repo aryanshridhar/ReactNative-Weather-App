@@ -33,14 +33,15 @@ Issues and pull requests are always appreciated .
 </ul>
 <br>
 
-#### API Used : 
+### API Used : 
 <a href = 'https://openweathermap.org/api'>Api</a><br>
-Allowing Only 60 call/min and 1000 calls/day.
+Allowing Only 60 calls/min with 1000 calls/day.
 <br>
 
 
 ### Download link : 
 
+<a href= 'https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40aryanshridhar/Weather-App-d353babd6e7441089bd337b3bb35dcb1-signed.apk'>Android </a>
 
 <br>
 
