@@ -60,6 +60,22 @@ const styles = StyleSheet.create({
     cellbottomtext : {
         color : "white",
         paddingTop : 10,
+    },
+    center : {
+        flex : 1,
+        flexDirection :'row',
+        justifyContent : "center",
+        alignItems : "center",
+    },
+    degree : {
+        fontSize : 30,
+        letterSpacing : 1,
+        lineHeight : 80,
+        fontFamily :"regular"
+    },
+    superscript : {
+        flexDirection: 'row', 
+        alignItems: 'flex-start'
     }
 })
 

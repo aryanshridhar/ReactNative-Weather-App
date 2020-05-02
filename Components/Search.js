@@ -1,5 +1,5 @@
 import React , {Component} from "react"
-import {Modal , View , StyleSheet} from "react-native"
+import {Modal , View , StyleSheet , Text} from "react-native"
 import { TextInput , Button  } from 'react-native-paper';
 import HistoryHeader from './HistoryHeader'
 
@@ -13,7 +13,6 @@ class Search extends Component{
     {
         this.setState({Value : e});
     }
-
     render()
     {
         return(
@@ -28,7 +27,7 @@ class Search extends Component{
                     mode = 'outlined'
                     onChangeText ={this.handlevalue}
                     value={this.state.Value}
-                    theme={{ colors: { primary: '#1B2433'}}}
+                    theme={ this.props.error ? { colors: { primary: '#FE0000'}} : { colors: { primary: '#1B2433'}}}
                     />
                     <View style ={styles.btnview}>
                         <Button theme={{ colors: { primary: '#1B2433'}}} mode="outlined" style = {styles.btn} onPress={this.props.handlepress.bind(this,this.state.Value)} >

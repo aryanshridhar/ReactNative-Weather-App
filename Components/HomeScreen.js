@@ -14,6 +14,7 @@ class HomeScreen extends Component{
         weather : null,
         tosearch : null,
         visible : false,
+        error : false
     }
 
     visiblechange = () =>
@@ -30,7 +31,7 @@ class HomeScreen extends Component{
     {
         this.setState({tosearch : value});
         this.state.tosearch = value;
-        this.setState({visible : false}); 
+        this.cancelbutton();
     }
 
     componentDidMount()
@@ -47,7 +48,7 @@ class HomeScreen extends Component{
             .then((data) => {
                 let location = data.city;
                 this.setState({country : data.country})
-                fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + location +`&appid=50a7aa80fa492fa92e874d23ad061374`)
+                fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + location +`&appid=2ce8a968c927ff321dbdd3712b5699a0`)
                 .then((resp) => {
                     return resp.json();
                 })
@@ -73,12 +74,20 @@ class HomeScreen extends Component{
         if(this.state.tosearch)
         {
             let location = this.state.tosearch;
-            fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + location +`&appid=2ce8a968c927ff321dbdd371`)
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + location +`&appid=2ce8a968c927ff321dbdd3712b5699a0`)
             .then((resp) => {
                 return resp.json();
             })
             .then((data) => {
+                if (data.cod === '404')
+                {
+                    this.setState({error : true});
+                }   
+                else
+                {            
                 this.setState({weather : data});
+                this.setState({error : false});
+                }
             })
             .catch(error => {
                 console.log(error);
@@ -89,7 +98,7 @@ class HomeScreen extends Component{
     render()
     {
         if(!this.state.weather){
-            return(
+            return (
                 <View style = {styles.center}>
                     <ActivityIndicator animating = {true} size="large" color="#00E1FD" />
                 </View>
@@ -99,6 +108,7 @@ class HomeScreen extends Component{
             <React.Fragment>
             <Header visiblechange = {this.visiblechange}/>
             <Search 
+            error = {this.state.error}
             handlepress = {this.handlepress}
             cancelbutton = {this.cancelbutton}
             visible = {this.state.visible}
@@ -106,7 +116,10 @@ class HomeScreen extends Component{
             <View style = {styles.homestart}>
                 <View style = {styles.topview}>
                     <View style = {styles.fortemp}>
-                        <Text style = {styles.temp}>{(this.state.weather.main['temp'] - 273).toFixed(1)}</Text>
+                        <View style = {styles.superscript}>
+                            <Text style = {styles.temp}>{(this.state.weather.main['temp'] - 273).toFixed(1)}</Text>
+                            <Text style={styles.degree}>°C</Text>
+                        </View>
                     </View>
                     <View style = {styles.locationtext}>
                         <Text style = {styles.citytext}>{countries[this.state.weather.sys.country].name}</Text>
