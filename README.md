@@ -2,10 +2,12 @@
 Simple Weather App to display current weather of any location/city/country .
 
 ### Preview : 
-
-
+![weather](https://user-images.githubusercontent.com/53977614/80868522-ddb94880-8cb8-11ea-9c62-e2f4d2851532.gif)
 <br>
 
+GIF recorded using <a href = 'https://github.com/phw/peek'>Peek</a>
+<br>
+<br>
 ### Contributing : 
 Issues and pull requests are always appreciated .
 
@@ -30,6 +32,11 @@ Issues and pull requests are always appreciated .
 <li>Start the deployment server using : <pre>expo start</pre></li>
 </li>
 <br>
+
+### API Used : 
+
+Click <a href = 'https://openweathermap.org/api'>here</a><br>
+<p>Allowing Only 60 call/min and 1000 calls/day</p>
 
 ### Download link : 
 
