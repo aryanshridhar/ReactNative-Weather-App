@@ -3,24 +3,25 @@ import { Appbar} from 'react-native-paper';
 import {StyleSheet} from "react-native"
 
 
-class Header extends Component {
+
+class BackHeader extends Component {
 
   render() {
     return (
       <Appbar.Header style = {styles.header}>
-          <Appbar.Action icon="magnify" size ={30} onPress={this.props.visiblechange} /> 
+        <Appbar.BackAction
+          onPress={this.props.cancelbutton}
+        />
       </Appbar.Header>
     );
   }
 }
 
-export default Header;
+export default BackHeader;
 
 const styles = StyleSheet.create({
     header : {
-        backgroundColor : "#00E1FD", 
-        paddingLeft : 20 , 
-        paddingTop : 10 , 
-        paddingBottom : 10
+        backgroundColor : "#1B2433", 
     }
 })
+
