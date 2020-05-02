@@ -1,6 +1,7 @@
 import React , {Component} from "react";
 import { BottomNavigation, Text } from 'react-native-paper';
 import HomeScreen from './HomeScreen'
+import { StyleSheet } from "react-native";
 
 
 const HomeRoute = () => {
@@ -8,14 +9,11 @@ const HomeRoute = () => {
     <HomeScreen/>
   )
 }
-const HistoryRoute = () => <Text>Albums</Text>;
-
 class Navigator extends Component {
   state = {
     index: 0,
     routes: [
-      { key: 'home', title: 'Home', icon: 'queue-music' , color : "#1B2433"},
-      { key: 'history', title: 'History', icon: 'album' , color : "#00E1FD"},
+      { key: 'home', title: 'Home', icon: 'album' , color : "#1B2433"},
     ],
   };
 
@@ -23,7 +21,6 @@ class Navigator extends Component {
 
   _renderScene = BottomNavigation.SceneMap({
     home: HomeRoute,
-    history: HistoryRoute,
   });
 
   render() {
@@ -31,11 +28,8 @@ class Navigator extends Component {
       <BottomNavigation
         activeColor = {'white'}
         style = {{backgroundColor : '#1B2433'}}
-        barStyle = {{backgroundColor : "#1B2433"}}
         navigationState={this.state}
-        shifting = {true}
-        barStyle = {{marginBottom  :10}}
-        onIndexChange={this._handleIndexChange}
+        barStyle = {customstyles.navigatorstyle}
         renderScene={this._renderScene}
       />
     );
@@ -43,3 +37,10 @@ class Navigator extends Component {
 }
 
 export default Navigator
+
+const customstyles = StyleSheet.create({
+  navigatorstyle : {
+    marginBottom  :10,
+    backgroundColor : "#1B2433"
+  }
+})

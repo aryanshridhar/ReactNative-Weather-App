@@ -3,18 +3,14 @@ import { Appbar} from 'react-native-paper';
 import {StyleSheet} from "react-native"
 
 
-class HistoryHeader extends Component {
 
-  _goBack = () =>
-  {
-    console.log('Fff');
-  }
+class HistoryHeader extends Component {
 
   render() {
     return (
       <Appbar.Header style = {styles.header}>
         <Appbar.BackAction
-          onPress={this._goBack}
+          onPress={this.props.cancelbutton}
         />
       </Appbar.Header>
     );

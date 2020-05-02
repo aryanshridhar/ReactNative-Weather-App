@@ -1,6 +1,5 @@
 import React , {Component} from "react"
 import {Modal , View , StyleSheet} from "react-native"
-import Header from './Header'
 import { TextInput , Button  } from 'react-native-paper';
 import HistoryHeader from './HistoryHeader'
 
@@ -9,7 +8,6 @@ class Search extends Component{
     state = {
         Value : ''
     }
-
 
     handlevalue = (e) =>
     {
@@ -21,7 +19,7 @@ class Search extends Component{
         return(
         <React.Fragment>
             <Modal visible = {this.props.visible} animationType ='slide'>
-                <HistoryHeader/>
+                <HistoryHeader cancelbutton = {this.props.cancelbutton}/>
                 <View style = {styles.mainview}>
                     <TextInput
                     autoFocus

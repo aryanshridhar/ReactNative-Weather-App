@@ -5,12 +5,13 @@ import Header from './Header'
 import * as Font from "expo-font"
 import Search from "./Search";
 import {countries} from 'country-data';
+import styles from './Styles'
 
 
 class HomeScreen extends Component{
 
     state = {
-        weather:  null,
+        weather : null,
         tosearch : null,
         visible : false,
     }
@@ -72,7 +73,7 @@ class HomeScreen extends Component{
         if(this.state.tosearch)
         {
             let location = this.state.tosearch;
-            fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + location +`&appid=50a7aa80fa492fa92e874d23ad061374`)
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + location +`&appid=2ce8a968c927ff321dbdd371`)
             .then((resp) => {
                 return resp.json();
             })
@@ -103,46 +104,46 @@ class HomeScreen extends Component{
             visible = {this.state.visible}
             />
             <View style = {styles.homestart}>
-                <View style = {{flex : 1 , backgroundColor : "#00E1FD"}}>
-                    <View style = {{flex : 1 , justifyContent : "flex-end" , alignItems :"center"}}>
-                        <Text style = {{fontFamily: "regular" , fontSize : 90 , letterSpacing : -5}}>{(this.state.weather.main['temp'] - 273).toFixed(1)}</Text>
+                <View style = {styles.topview}>
+                    <View style = {styles.fortemp}>
+                        <Text style = {styles.temp}>{(this.state.weather.main['temp'] - 273).toFixed(1)}</Text>
                     </View>
-                    <View style = {{flex : 0.8 , alignItems : "center"}}>
-                        <Text style = {{fontFamily: "regular" , fontSize : 40}}>{countries[this.state.weather.sys.country].name}</Text>
-                        <Text style = {{fontFamily: "regular" , fontSize : 30}}>{this.state.weather.name}</Text>
+                    <View style = {styles.locationtext}>
+                        <Text style = {styles.citytext}>{countries[this.state.weather.sys.country].name}</Text>
+                        <Text style = {styles.countrytext}>{this.state.weather.name}</Text>
                     </View>
                 </View>
-                <View style = {{flex : 0.9, padding : 5, backgroundColor : "#1B2433"}}>
-                    <View style = {{flexDirection : "row" , flex : 1}}>
-                        <View style = {{borderRadius : 10,flex : 1 , justifyContent : "center" , alignItems : "center" , borderColor : "white" , borderWidth : 2}}>
-                            <Text style = {{color : "white"}}>Description</Text>
-                            <Text style = {{color : "white", paddingTop : 10}}>{this.state.weather.weather[0].main}</Text>
+                <View style = {styles.bottomview}>
+                    <View style = {styles.toprow}>
+                        <View style = {styles.cell}>
+                            <Text style = {styles.celltext}>Description</Text>
+                            <Text style = {styles.cellbottomtext}>{this.state.weather.weather[0].main}</Text>
                         </View>
-                        <View style = {{borderRadius : 10,flex : 1,justifyContent : "center" , alignItems : "center", borderColor : "white" , borderWidth : 2}}>
-                            <Text style = {{color : "white"}}>Feels Like</Text>
-                            <Text style = {{color : "white", paddingTop : 10}}>{(this.state.weather.main.feels_like -273).toFixed(2)}</Text>
+                        <View style = {styles.cell}>
+                            <Text style = {styles.celltext}>Feels Like</Text>
+                            <Text style = {styles.cellbottomtext}>{(this.state.weather.main.feels_like -273).toFixed(2)}</Text>
 
                         </View>
-                        <View style = {{borderRadius : 10,flex : 1, justifyContent : "center" , alignItems : "center", borderColor : "white" , borderWidth : 2}}>
-                            <Text style = {{color : "white"}}>Humidity</Text>
-                            <Text style = {{color : "white", paddingTop : 10}}>{this.state.weather.main.humidity}</Text>
+                        <View style = {styles.celllast}>
+                            <Text style = {styles.celltext}>Humidity</Text>
+                            <Text style = {styles.cellbottomtext}>{this.state.weather.main.humidity}</Text>
 
                         </View>
                     </View>
                     <View style = {{flexDirection : "row" , flex : 1}}>
-                        <View style = {{borderRadius : 10,flex : 1 , justifyContent : "center" , alignItems : "center", borderColor : "white" , borderWidth : 2}}>
-                            <Text style = {{color : "white"}}>Pressure</Text>
-                            <Text style = {{color : "white", paddingTop : 10}}>{this.state.weather.main.pressure}</Text>
+                        <View style = {styles.cell}>
+                            <Text style = {styles.celltext}>Pressure</Text>
+                            <Text style = {styles.cellbottomtext}>{this.state.weather.main.pressure}</Text>
 
                         </View>
-                        <View style = {{borderRadius : 10,flex : 1,justifyContent : "center" , alignItems : "center", borderColor : "white" , borderWidth : 2}}>
-                            <Text style = {{color : "white"}}>Visibility</Text>
-                            <Text style = {{color : "white", paddingTop : 10}}>{this.state.weather.visibility}</Text>
+                        <View style = {styles.cell}>
+                            <Text style = {styles.celltext}>Visibility</Text>
+                            <Text style = {styles.cellbottomtext}>{this.state.weather.visibility}</Text>
 
                         </View>
-                        <View style = {{borderRadius : 10,flex : 1, justifyContent : "center" , alignItems : "center", borderColor : "white" , borderWidth : 2}}>
-                            <Text style = {{color : "white"}}>Wind Speed</Text>
-                            <Text style = {{color : "white", paddingTop : 10}}>{this.state.weather.wind.speed}</Text>
+                        <View style = {styles.celllast}>
+                            <Text style = {styles.celltext}>Wind Speed</Text>
+                            <Text style = {styles.cellbottomtext}>{this.state.weather.wind.speed}</Text>
 
                         </View>
                     </View>
@@ -156,9 +157,3 @@ class HomeScreen extends Component{
 
 export default HomeScreen;
 
-
-const styles = StyleSheet.create({
-    homestart: {
-        flex : 1,
-    },
-})
