@@ -36,7 +36,7 @@ Issues and pull requests are always appreciated .
 ### API Used : 
 
 Click <a href = 'https://openweathermap.org/api'>here</a><br>
-<p>Allowing Only 60 call/min and 1000 calls/day</p>
+Allowing Only 60 call/min and 1000 calls/day
 
 ### Download link : 
 
