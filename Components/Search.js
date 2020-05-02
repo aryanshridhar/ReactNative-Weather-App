@@ -1,24 +1,35 @@
 import React , {Component} from "react"
 import {Modal , View , StyleSheet , Text} from "react-native"
 import { TextInput , Button  } from 'react-native-paper';
-import HistoryHeader from './HistoryHeader'
+import BackHeader from './BackHeader'
 
 class Search extends Component{
     
     state = {
-        Value : ''
+        Value : '',
     }
 
     handlevalue = (e) =>
     {
         this.setState({Value : e});
     }
+
+    handlepress = () =>
+    {
+        if(this.state.Value !== '')
+        {
+            this.props.handleapipress(this.state.Value);
+        }
+        this.setState({Value : ""});
+        
+    }
+
     render()
     {
         return(
         <React.Fragment>
             <Modal visible = {this.props.visible} animationType ='slide'>
-                <HistoryHeader cancelbutton = {this.props.cancelbutton}/>
+                <BackHeader cancelbutton = {this.props.cancelbutton}/>
                 <View style = {styles.mainview}>
                     <TextInput
                     autoFocus
@@ -30,7 +41,7 @@ class Search extends Component{
                     theme={ this.props.error ? { colors: { primary: '#FE0000'}} : { colors: { primary: '#1B2433'}}}
                     />
                     <View style ={styles.btnview}>
-                        <Button theme={{ colors: { primary: '#1B2433'}}} mode="outlined" style = {styles.btn} onPress={this.props.handlepress.bind(this,this.state.Value)} >
+                        <Button theme={{ colors: { primary: '#1B2433'}}} mode="outlined" style = {styles.btn} onPress={this.handlepress} >
                             Search
                         </Button>
                         <Button theme={{ colors: { primary: '#1B2433'}}} mode="outlined" style = {styles.btn} onPress = {this.props.cancelbutton}>
@@ -63,7 +74,6 @@ const styles = StyleSheet.create({
     btn : {
         flex : 1,
         borderColor: 'transparent'
-        
     },
     btnview : {
         flexDirection : "row",

@@ -4,7 +4,7 @@ import {StyleSheet} from "react-native"
 
 
 
-class HistoryHeader extends Component {
+class BackHeader extends Component {
 
   render() {
     return (
@@ -17,7 +17,7 @@ class HistoryHeader extends Component {
   }
 }
 
-export default HistoryHeader;
+export default BackHeader;
 
 const styles = StyleSheet.create({
     header : {

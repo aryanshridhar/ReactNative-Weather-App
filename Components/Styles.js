@@ -55,7 +55,9 @@ const styles = StyleSheet.create({
         borderColor : "#00E1FD" , 
     },
     celltext : {
-        color : "white"
+        color : "white",
+        fontSize : 15,
+        fontFamily : "regular"
     },
     cellbottomtext : {
         color : "white",

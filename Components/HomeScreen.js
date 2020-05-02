@@ -1,5 +1,5 @@
 import React , {Component} from "react";
-import {View , StyleSheet , ActivityIndicator, Text , Image, TouchableOpacity} from "react-native";
+import {View , ActivityIndicator, Text} from "react-native";
 import publicIP from 'react-native-public-ip';
 import Header from './Header'
 import * as Font from "expo-font"
@@ -27,10 +27,25 @@ class HomeScreen extends Component{
         this.setState({visible : false});
     }
 
-    handlepress = (value) =>
+    handleapipress = (value) =>
     {
-        this.setState({tosearch : value});
-        this.state.tosearch = value;
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + value +`&appid=7f0a7331f71981a08dd1edda80c15c43`)
+        .then((resp) => {
+            return resp.json();
+        })
+        .then((data) => {
+            if (data.cod === '404')
+            {
+                this.setState({error : true});
+            }
+            else{
+                this.setState({error : false});
+                this.setState({weather : data}); 
+            }         
+        })
+        .catch(error => {
+            console.log(error);
+        })
         this.cancelbutton();
     }
 
@@ -48,7 +63,7 @@ class HomeScreen extends Component{
             .then((data) => {
                 let location = data.city;
                 this.setState({country : data.country})
-                fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + location +`&appid=2ce8a968c927ff321dbdd3712b5699a0`)
+                fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + location +`&appid=7f0a7331f71981a08dd1edda80c15c43`)
                 .then((resp) => {
                     return resp.json();
                 })
@@ -69,32 +84,6 @@ class HomeScreen extends Component{
         });
     }
 
-    componentDidUpdate()
-    {
-        if(this.state.tosearch)
-        {
-            let location = this.state.tosearch;
-            fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + location +`&appid=2ce8a968c927ff321dbdd3712b5699a0`)
-            .then((resp) => {
-                return resp.json();
-            })
-            .then((data) => {
-                if (data.cod === '404')
-                {
-                    this.setState({error : true});
-                }   
-                else
-                {            
-                this.setState({weather : data});
-                this.setState({error : false});
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            })
-        }
-    }
-
     render()
     {
         if(!this.state.weather){
@@ -108,6 +97,8 @@ class HomeScreen extends Component{
             <React.Fragment>
             <Header visiblechange = {this.visiblechange}/>
             <Search 
+            handleapipress = {this.handleapipress}
+            tosearch = {this.state.tosearch}
             error = {this.state.error}
             handlepress = {this.handlepress}
             cancelbutton = {this.cancelbutton}
